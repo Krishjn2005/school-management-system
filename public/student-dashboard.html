@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard · School OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .subject-row{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .subject-row:last-child{ border-bottom:none; padding-bottom:0; }
+  .subject-row:first-child{ padding-top:0; }
+  .subject-chip{ width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:12px; flex-shrink:0; }
+  .timetable-row{ display:flex; align-items:center; gap:14px; padding:11px 0; border-bottom:1px dashed var(--border); }
+  .timetable-row:last-child{ border-bottom:none; }
+  .tt-time{ width:64px; font-size:11.5px; color:var(--muted); font-weight:600; flex-shrink:0; }
+  .tt-bar{ width:3px; align-self:stretch; border-radius:3px; }
+  .wa-cta{
+    display:flex; align-items:center; gap:12px; background:#1F8A57; border-radius: var(--radius-md);
+    padding:14px 16px; color:#fff;
+  }
+  .wa-cta svg{ width:26px; height:26px; flex-shrink:0; }
+  .wa-cta b{ display:block; font-size:13px; }
+  .wa-cta span{ font-size:11.5px; color:rgba(255,255,255,.8); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">S</div>
+      <div>
+        <div class="brand-name">School OS</div>
+        <div class="brand-sub">Greenfield Public School</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="nav-group-label">MY SPACE</div>
+      <nav class="nav">
+        <a class="active" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>Overview</a>
+        <a href="#attendance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="4.5" width="17" height="16" rx="3"/><path d="M8 3v3M16 3v3M3.5 9.5h17"/><path d="M8.2 14l2.3 2.3 4.8-4.8"/></svg>Attendance</a>
+        <a href="#homework"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.2A2.2 2.2 0 0 1 6.2 3H18a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6.5A2.5 2.5 0 0 1 4 18.5V5.2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Homework</a>
+        <a href="#marks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9M12 19V5M20 19v-7"/></svg>Report card</a>
+        <a href="#fees"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>Fees</a>
+        <a href="#timetable"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>Timetable</a>
+        <a href="#library"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Library</a>
+        <a href="#notices"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10v4a1 1 0 0 0 1 1h2l4 4V5l-4 4H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg>Notices</a>
+      </nav>
+    </div>
+
+    <div>
+      <div class="nav-group-label">ACCOUNT</div>
+      <nav class="nav">
+        <a href="manager-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>Switch to Manager View</a>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <span class="tag">PITCH DEMO</span>
+      <p>This is what every parent sees after registering their child once on WhatsApp.</p>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Search homework, notices, subjects…
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn"><span class="dot"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+        <div class="profile">
+          <div class="avatar">AK</div>
+          <div>
+            <div class="profile-name">Arjun Kapoor</div>
+            <div class="profile-role">Class 7C · Roll No. 18</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <h1>Welcome back, Arjun 🎒</h1>
+          <div class="sub">Viewed by parent: Mrs. Kapoor · Tuesday, 16 September</div>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>Download report card</button>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="grid stat-grid">
+        <div class="card stat-card">
+          <div class="stat-top"><div class="stat-icon e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8.2 14l2.3 2.3 4.8-4.8"/><circle cx="12" cy="12" r="9"/></svg></div><span class="pill pill-emerald">Good</span></div>
+          <div><div class="stat-number">91%</div><div class="stat-label">Attendance this term</div></div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-top"><div class="stat-icon s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.2A2.2 2.2 0 0 1 6.2 3H18a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6.5A2.5 2.5 0 0 1 4 18.5V5.2z"/></svg></div><span class="pill pill-sky">3 due</span></div>
+          <div><div class="stat-number">3</div><div class="stat-label">Homework pending</div></div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-top"><div class="stat-icon a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/></svg></div><span class="pill pill-amber">Due 28 Sep</span></div>
+          <div><div class="stat-number">₹8,400</div><div class="stat-label">Fees outstanding</div></div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-top"><div class="stat-icon v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9M12 19V5M20 19v-7"/></svg></div><span class="stat-trend up">↑ 4 pts</span></div>
+          <div><div class="stat-number">82%</div><div class="stat-label">Average marks</div></div>
+        </div>
+      </div>
+
+      <div class="banner">
+        <div>
+          <h2>Fee reminder: ₹8,400 due on 28 September.</h2>
+          <p>Pay online in under a minute, or reply "pay" on WhatsApp any time — you'll get an instant receipt for Mrs. Kapoor's records.</p>
+        </div>
+        <button class="btn btn-primary">Pay now</button>
+      </div>
+
+      <div class="grid two-col">
+        <!-- LEFT -->
+        <div class="grid" style="gap:18px;">
+
+          <div class="card card-pad" id="homework">
+            <div class="card-head">
+              <div><h3>Homework &amp; assignments</h3><div class="sub">Posted by teachers, updates instantly</div></div>
+              <a class="link" href="#">View all</a>
+            </div>
+            <div class="subject-row">
+              <div class="subject-chip" style="background:var(--sky-tint); color:var(--sky)">MA</div>
+              <div class="row-main"><div class="row-title">Mathematics — Exercise 4.2, Q1–10</div><div class="row-sub">Posted by Mr. Sharma</div></div>
+              <span class="pill pill-amber">Due tomorrow</span>
+            </div>
+            <div class="subject-row">
+              <div class="subject-chip" style="background:var(--emerald-tint); color:var(--emerald)">SC</div>
+              <div class="row-main"><div class="row-title">Science — Diagram: the water cycle</div><div class="row-sub">Posted by Mrs. Iyer</div></div>
+              <span class="pill pill-sky">Due Fri</span>
+            </div>
+            <div class="subject-row">
+              <div class="subject-chip" style="background:var(--amber-tint); color:#a3690f">EN</div>
+              <div class="row-main"><div class="row-title">English — Essay: "My favourite season"</div><div class="row-sub">Posted by Ms. D'Souza</div></div>
+              <span class="pill pill-sky">Due Mon</span>
+            </div>
+            <div class="subject-row">
+              <div class="subject-chip" style="background:var(--primary-tint); color:var(--primary)">HI</div>
+              <div class="row-main"><div class="row-title">History — Read Chapter 6, answer in-text Qs</div><div class="row-sub">Posted by Mr. Rao</div></div>
+              <span class="pill pill-muted">Submitted</span>
+            </div>
+          </div>
+
+          <div class="card card-pad" id="marks">
+            <div class="card-head">
+              <div><h3>Report card</h3><div class="sub">Latest unit test, out of 100</div></div>
+              <a class="link" href="#">Full history</a>
+            </div>
+            <div class="bars">
+              <div class="bar-col"><div class="bar-track"><div class="bar-fill" style="height:88%; background:linear-gradient(180deg,#2E9BE0,#1B7DBE)"></div></div><div class="bar-label">Maths</div></div>
+              <div class="bar-col"><div class="bar-track"><div class="bar-fill" style="height:79%; background:linear-gradient(180deg,#1BA672,#0F7E56)"></div></div><div class="bar-label">Science</div></div>
+              <div class="bar-col"><div class="bar-track"><div class="bar-fill" style="height:84%"></div></div><div class="bar-label">English</div></div>
+              <div class="bar-col"><div class="bar-track"><div class="bar-fill" style="height:73%; background:linear-gradient(180deg,#F0A93F,#C4841F)"></div></div><div class="bar-label">History</div></div>
+              <div class="bar-col"><div class="bar-track"><div class="bar-fill" style="height:90%; background:linear-gradient(180deg,#E1496A,#B7304E)"></div></div><div class="bar-label">Hindi</div></div>
+            </div>
+          </div>
+
+          <div class="card card-pad" id="timetable">
+            <div class="card-head"><div><h3>Today's timetable</h3><div class="sub">Class 7C</div></div></div>
+            <div class="timetable-row"><div class="tt-time">8:30</div><div class="tt-bar" style="background:var(--sky)"></div><div class="row-main"><div class="row-title">Mathematics</div><div class="row-sub">Room 204 · Mr. Sharma</div></div></div>
+            <div class="timetable-row"><div class="tt-time">9:20</div><div class="tt-bar" style="background:var(--emerald)"></div><div class="row-main"><div class="row-title">Science lab</div><div class="row-sub">Lab 2 · Mrs. Iyer</div></div></div>
+            <div class="timetable-row"><div class="tt-time">10:40</div><div class="tt-bar" style="background:var(--amber)"></div><div class="row-main"><div class="row-title">English</div><div class="row-sub">Room 204 · Ms. D'Souza</div></div></div>
+            <div class="timetable-row"><div class="tt-time">12:15</div><div class="tt-bar" style="background:var(--primary)"></div><div class="row-main"><div class="row-title">History</div><div class="row-sub">Room 108 · Mr. Rao</div></div></div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="grid" style="gap:18px;">
+
+          <div class="card card-pad" id="attendance">
+            <div class="card-head"><div><h3>Attendance</h3><div class="sub">This term</div></div></div>
+            <div class="ring-wrap">
+              <svg width="132" height="132" viewBox="0 0 132 132">
+                <circle cx="66" cy="66" r="56" fill="none" stroke="#DEF4EA" stroke-width="14"/>
+                <circle cx="66" cy="66" r="56" fill="none" stroke="#1BA672" stroke-width="14" stroke-linecap="round" stroke-dasharray="352" stroke-dashoffset="32"/>
+              </svg>
+              <div class="ring-center"><div class="num">91%</div><div class="lbl">present</div></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:16px; font-size:12.5px;">
+              <div><div style="color:var(--muted)">Present</div><div style="font-weight:700; font-family:'Space Grotesk'">82 days</div></div>
+              <div style="text-align:right"><div style="color:var(--muted)">Absent</div><div style="font-weight:700; font-family:'Space Grotesk'; color:var(--rose)">8 days</div></div>
+            </div>
+          </div>
+
+          <div class="card card-pad" id="fees">
+            <div class="card-head"><div><h3>Fees</h3><div class="sub">Term 2, 2026</div></div></div>
+            <div class="row-list">
+              <div class="row-item"><div class="row-main"><div class="row-title">Tuition — Term 2</div><div class="row-sub">Paid 2 Aug</div></div><span class="pill pill-emerald">Paid</span></div>
+              <div class="row-item"><div class="row-main"><div class="row-title">Transport — Sep</div><div class="row-sub">Due 28 Sep</div></div><span class="pill pill-amber">₹5,400</span></div>
+              <div class="row-item"><div class="row-main"><div class="row-title">Activity fee</div><div class="row-sub">Due 28 Sep</div></div><span class="pill pill-amber">₹3,000</span></div>
+            </div>
+            <button class="btn btn-primary btn-sm" style="width:100%; justify-content:center; margin-top:14px;">Pay ₹8,400 now</button>
+          </div>
+
+          <div class="card card-pad" id="notices">
+            <div class="card-head"><div><h3>Notices</h3><div class="sub">From school administration</div></div></div>
+            <div class="row-list">
+              <div class="row-item"><div class="row-avatar" style="background:var(--primary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 10v4a1 1 0 0 0 1 1h2l4 4V5l-4 4H5a1 1 0 0 0-1 1z"/></svg></div><div class="row-main"><div class="row-title">Parent-teacher meeting, 21 Sep</div><div class="row-sub">4:00 PM – 6:30 PM, main hall</div></div></div>
+              <div class="row-item"><div class="row-avatar" style="background:var(--amber)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 10v4a1 1 0 0 0 1 1h2l4 4V5l-4 4H5a1 1 0 0 0-1 1z"/></svg></div><div class="row-main"><div class="row-title">Half-day on 25 Sep</div><div class="row-sub">School closes at 12:30 PM</div></div></div>
+              <div class="row-item"><div class="row-avatar" style="background:var(--emerald)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 10v4a1 1 0 0 0 1 1h2l4 4V5l-4 4H5a1 1 0 0 0-1 1z"/></svg></div><div class="row-main"><div class="row-title">Annual sports day registrations open</div><div class="row-sub">Sign up via WhatsApp by 30 Sep</div></div></div>
+            </div>
+          </div>
+
+          <div class="card card-pad" id="library">
+            <div class="card-head"><div><h3>Library</h3><div class="sub">Currently borrowed</div></div></div>
+            <div class="row-item" style="padding-top:0;">
+              <div class="row-avatar" style="background:var(--sky)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+              <div class="row-main"><div class="row-title">Wonder — R.J. Palacio</div><div class="row-sub">Return by 20 Sep</div></div>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <div class="wa-cta">
+              <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20z"/></svg>
+              <div><b>Have a question?</b><span>Message the school bot on WhatsApp — instant answers</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

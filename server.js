@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const twilio = require('twilio');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const Anthropic = require('@anthropic-ai/sdk');
@@ -6,9 +7,21 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.redirect('/dashboard');
+});
+
+// Manager / admin dashboard (pitch-ready visual demo, static mock data)
+app.get('/manager', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'manager-dashboard.html'));
+});
+
+// Student / parent dashboard (pitch-ready visual demo, static mock data)
+app.get('/student', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'student-dashboard.html'));
 });
 
 const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
@@ -316,12 +329,20 @@ app.get('/dashboard', async (req, res) => {
     .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
     .btn { padding: 10px 20px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
     .btn:hover { background: #333; }
+    .navlinks { display: flex; gap: 12px; margin-top: 16px; }
+    .navlinks a { display: inline-block; padding: 9px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; text-decoration: none; }
+    .navlinks a.primary { background: #5B3FE0; color: #fff; }
+    .navlinks a.secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
   </style>
 </head>
 <body>
   <div class="navbar">
     <h1>School Management System</h1>
     <p>Complete solution for parent communication, attendance, fees, homework, and discipline tracking</p>
+    <div class="navlinks">
+      <a class="primary" href="/manager">Open Manager Dashboard →</a>
+      <a class="secondary" href="/student">Open Student Dashboard →</a>
+    </div>
   </div>
   
   <div class="container">
@@ -360,6 +381,10 @@ app.get('/dashboard', async (req, res) => {
           <h4>✓ School Announcements</h4>
           <p>Get event updates, schedule changes, urgent alerts</p>
         </div>
+        <div class="feature-box">
+          <h4>✓ Student Web Dashboard</h4>
+          <p>A visual login for each child — attendance ring, timetable, report card, fee status, library books, all in one place</p>
+        </div>
       </div>
     </div>
 
@@ -389,6 +414,14 @@ app.get('/dashboard', async (req, res) => {
         <div class="feature-box">
           <h4>✓ Broadcast Announcements</h4>
           <p>Send to all parents at once. No manual messaging</p>
+        </div>
+        <div class="feature-box">
+          <h4>✓ Manager Dashboard</h4>
+          <p>Live view of attendance trends, fee collection, discipline queue, class-wise breakdowns and WhatsApp activity — all in one screen</p>
+        </div>
+        <div class="feature-box">
+          <h4>✓ Class-wise Analytics</h4>
+          <p>Spot at-risk classes instantly by attendance, fee collection and behaviour flags</p>
         </div>
       </div>
     </div>
