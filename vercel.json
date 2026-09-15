@@ -1,4 +1,7 @@
 {
   "buildCommand": "npm install",
-  "devCommand": "node server.js"
+  "devCommand": "node server.js",
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
